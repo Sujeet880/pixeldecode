@@ -1,26 +1,113 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F8F7F4;
+  --foreground: #111111;
+  --text-secondary: #6B6B6B;
+  --border: #E5E3DE;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Restrained V1 Color Palette */
+  --color-brand-dark: #111111;
+  --color-brand-warm: #F8F7F4;
+  --color-brand-white: #FFFFFF;
+  --color-brand-accent: #1E3A5F;
+  --color-brand-border: var(--border);
+  --color-brand-secondary: var(--text-secondary);
+
+  /* Centralized Typography Scale V3 */
+  --text-display: clamp(3rem, 4.5vw + 1.5rem, 5.25rem);
+  --text-section-heading: clamp(2.375rem, 3.5vw + 1.25rem, 3.75rem);
+  --text-subheading: clamp(1.875rem, 2.5vw + 1.125rem, 3rem);
+  --text-project-heading: clamp(1.5rem, 2vw + 1rem, 2.125rem);
+  --text-body-lead: clamp(1rem, 0.8vw + 0.875rem, 1.1875rem);
+  --text-body: clamp(1rem, 0.5vw + 0.875rem, 1.0625rem);
+  --text-small-text: clamp(0.875rem, 0.4vw + 0.75rem, 0.9375rem);
+  --text-micro-label: clamp(0.6875rem, 0.2vw + 0.625rem, 0.75rem);
+
+  /* Spacing Scale (Editorial vertical/horizontal intervals) */
+  --spacing-s8: 0.5rem;
+  --spacing-s12: 0.75rem;
+  --spacing-s16: 1rem;
+  --spacing-s24: 1.5rem;
+  --spacing-s32: 2rem;
+  --spacing-s48: 3rem;
+  --spacing-s64: 4rem;
+  --spacing-s80: 5rem;
+  --spacing-s96: 6rem;
+  --spacing-s128: 8rem;
+  --spacing-s160: 10rem;
+
+  /* Restrained Border Radii */
+  --radius-small-ui: 8px;
+  --radius-button: 10px;
+  --radius-large-ui: 16px;
+
+  /* Subtle depth shadows */
+  --shadow-editorial: 0 10px 30px -10px rgba(17, 17, 17, 0.05), 0 1px 3px rgba(17, 17, 17, 0.02);
+
+  /* Transitions */
+  --transition-editorial: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Animation Tokens */
+  --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fade-in 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Height-Based Viewport Constraints for Hero Section */
+@media (max-height: 840px) and (min-width: 1024px) {
+  :root {
+    --text-display: clamp(2.5rem, 3.2vw + 1.25rem, 3.85rem) !important; /* Scale down H1 display typography */
+  }
+  .hero-image-container {
+    max-height: 440px !important;
+  }
+  .hero-scroll-cue {
+    display: none !important; /* Hide scroll cue when space is vertical premium */
+  }
+}
+
+@media (max-height: 768px) and (min-width: 1024px) {
+  :root {
+    --text-display: clamp(2.25rem, 3vw + 1.15rem, 3.5rem) !important;
+  }
+  .hero-image-container {
+    max-height: 380px !important;
+  }
 }
